@@ -1,7 +1,13 @@
 package ru.netology;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -58,7 +64,7 @@ public class Main {
     static void savePhoneBook(PhoneBook phoneBook) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("phonebook.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        List<Contact> serializableList = new ArrayList<>(phoneBook.getContactSet());
+        Set<Contact> serializableList = new HashSet<>(phoneBook.getContactSet());
         objectOutputStream.writeObject(serializableList);
         objectOutputStream.flush();
         objectOutputStream.close();
@@ -68,7 +74,7 @@ public class Main {
     static PhoneBook loadPhoneBook() throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream("phonebook.txt");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Collection<Contact> deserializedContacts = (Collection<Contact>) objectInputStream.readObject();
+        Set<Contact> deserializedContacts = (Set<Contact>)objectInputStream.readObject();
         PhoneBook phoneBook = new PhoneBook();
         phoneBook.setContactSet(deserializedContacts);
         return phoneBook;

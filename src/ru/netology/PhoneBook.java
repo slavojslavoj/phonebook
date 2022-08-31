@@ -20,7 +20,7 @@ public class PhoneBook {
         contactSet.addAll(contacts);
     }
 
-    public Collection<Contact> getContactSet() {
+    public Set<Contact> getContactSet() {
         return contactSet;
     }
 
